@@ -4,8 +4,6 @@ project:
 
 book:
   title: "ADSP 31006 ON02 Final Project - Group 3"
-  author: "Maja Ivanovic, Victoria Li, Kathleen Nie, Mpiira Tabuti"
-  date: today
   chapters:
     - index.qmd
     - core_idea.qmd

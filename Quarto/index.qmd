@@ -1,0 +1,234 @@
+---
+title: Final Project
+jupyter: python3
+---
+
+Course: ADSP 31006 ON02 Time Series Analysis and Forecasting
+
+Students: Maja Ivanovic, Victoria Li, Kathleen Nie, Mpiira Tabuti
+
+
+### 0. Dependencies, data import, and helper functions
+
+```{python}
+import pandas as pd  
+import numpy as np
+import matplotlib.pyplot as plt
+
+import joblib
+from pathlib import Path
+
+from dtaidistance import dtw
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.impute import SimpleImputer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import (
+    RandomForestClassifier,
+    RandomForestRegressor
+)
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import (
+    confusion_matrix,
+    ConfusionMatrixDisplay,
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
+    roc_auc_score,
+    classification_report,
+    balanced_accuracy_score,
+)
+
+import warnings
+warnings.filterwarnings('ignore')
+```
+
+```{python}
+DATA_DIR     = Path("../ECG200")
+MODELS_DIR   = Path("../models")
+RANDOM_STATE = 42
+```
+
+```{python}
+def dtw_distance(u, v):
+    return dtw.distance(u, v)
+```
+
+# A. Normal un-transformed data
+
+### A.1. Pre-processing
+
+```{python}
+# --- Load TRAIN ---
+df_train = pd.read_csv(
+    DATA_DIR / "ECG200_TRAIN.txt",
+    sep='\s+',
+    header=None
+)
+
+# --- Load TEST ---
+df_test = pd.read_csv(
+    DATA_DIR / "ECG200_TEST.txt",
+    sep='\s+',
+    header=None
+)
+
+# --- Split into features and labels ---
+y_train = df_train.iloc[:, 0].values
+X_train = df_train.iloc[:, 1:].values
+
+y_test  = df_test.iloc[:, 0].values
+X_test  = df_test.iloc[:, 1:].values
+```
+
+### A.3. Load and apply models
+
+```{python}
+model_files = {
+    "knn_dtw_k5": MODELS_DIR / "knn_dtw_k5.pkl",
+    "knn_euclidean_k5": MODELS_DIR / "knn_euclidean_k5.pkl",
+    "logreg": MODELS_DIR / "logreg.pkl",
+    "svm_rbf": MODELS_DIR / "svm_rbf.pkl",
+}
+
+rows = []
+
+for name, path in model_files.items():
+
+    model = joblib.load(path)
+
+    y_pred = model.predict(X_test)
+
+    if hasattr(model, "predict_proba"):
+        y_prob = model.predict_proba(X_test)[:, 1]
+    else:
+        y_prob = None
+
+    tn, fp, fn, tp = confusion_matrix(y_test, y_pred, labels=[-1, 1]).ravel()
+
+    accuracy = accuracy_score(y_test, y_pred)
+    precision = precision_score(y_test, y_pred, pos_label=1)
+    recall = recall_score(y_test, y_pred, pos_label=1)
+    specificity = tn / (tn + fp)
+    f1 = f1_score(y_test, y_pred, pos_label=1)
+    bal_acc = balanced_accuracy_score(y_test, y_pred)
+
+    auc = roc_auc_score(y_test, y_prob) if y_prob is not None else np.nan
+
+    rows.append({
+        "Model": name,
+        "Accuracy": accuracy,
+        "Precision": precision,
+        "Recall (Sensitivity)": recall,
+        "Specificity": specificity,
+        "F1": f1,
+        "Balanced_Accuracy": bal_acc,
+        "AUC": auc,
+    })
+
+results_df = pd.DataFrame(rows).sort_values(by="F1", ascending=False)
+
+print("\n=== Model Evaluation Summary (Test Set) ===")
+print(results_df.to_string(index=False))
+```
+
+# B. Phase shifted data
+
+### B.1. Pre-processing
+
+```{python}
+RNG = np.random.default_rng(seed=RANDOM_STATE)   
+
+def jitter_series(X, max_shift=20):
+    """Return a copy of X where every row is circularly shifted by a
+    random integer in [-max_shift, max_shift]."""
+    shifts = RNG.integers(-max_shift, max_shift + 1, size=len(X))
+    return np.array([np.roll(row, s) for row, s in zip(X, shifts)]), shifts
+
+X_train_jit, shifts_train = jitter_series(X_train)
+X_test_jit,  shifts_test  = jitter_series(X_test)
+
+print(f"Train jitter — min: {shifts_train.min():+d}  max: {shifts_train.max():+d}  "
+        f"mean: {shifts_train.mean():+.2f}")
+print(f"Test  jitter — min: {shifts_test.min():+d}  max: {shifts_test.max():+d}  "
+        f"mean: {shifts_test.mean():+.2f}")
+
+# --- Sanity check: one original time series vs. its jittered version ---
+fig, axes = plt.subplots(2, 1, figsize=(10, 4), sharex=True)
+idx = 0
+axes[0].plot(X_train[idx], label="Original", color="steelblue")
+axes[0].set_title(f"Train series {idx}  (label={y_train[idx]:.0f})")
+axes[0].legend()
+axes[1].plot(X_train_jit[idx], label=f"Jittered (shift={shifts_train[idx]:+d})", color="tomato")
+axes[1].legend()
+plt.tight_layout()
+plt.show()
+```
+
+### B.2. Build and save classification models
+
+```{python}
+#Continue to use models from A.2.
+```
+
+### B.3. Load and apply models
+
+```{python}
+#| scrolled: true
+model_files = {
+    "knn_dtw_k5":       MODELS_DIR / "knn_dtw_k5.pkl",
+    "knn_euclidean_k5": MODELS_DIR / "knn_euclidean_k5.pkl",
+    "logreg":           MODELS_DIR / "logreg.pkl",
+    "svm_rbf":          MODELS_DIR / "svm_rbf.pkl",
+}
+
+rows_jit = []
+
+for name, path in model_files.items():
+
+    model = joblib.load(path)
+
+    y_pred = model.predict(X_test_jit)
+
+    if hasattr(model, "predict_proba"):
+        y_prob = model.predict_proba(X_test_jit)[:, 1]
+    else:
+        y_prob = None
+
+    tn, fp, fn, tp = confusion_matrix(y_test, y_pred, labels=[-1, 1]).ravel()
+
+    rows_jit.append({
+        "Model":                name,
+        "Accuracy":             accuracy_score(y_test, y_pred),
+        "Precision":            precision_score(y_test, y_pred, pos_label=1),
+        "Recall (Sensitivity)": recall_score(y_test, y_pred, pos_label=1),
+        "Specificity":          tn / (tn + fp),
+        "F1":                   f1_score(y_test, y_pred, pos_label=1),
+        "Balanced_Accuracy":    balanced_accuracy_score(y_test, y_pred),
+        "AUC":                  roc_auc_score(y_test, y_prob) if y_prob is not None else np.nan,
+    })
+
+results_jit_df = pd.DataFrame(rows_jit).sort_values("F1", ascending=False)
+
+print("\n=== Jittered Test Set (trained on clean) ===")
+print(results_jit_df.to_string(index=False))
+
+# --- Degradation vs. original clean results ---
+degradation = (
+    results_df[["Model", "F1"]]
+    .rename(columns={"F1": "F1_clean"})
+    .merge(results_jit_df[["Model", "F1"]], on="Model")
+    .assign(F1_drop=lambda d: d["F1_clean"] - d["F1"])
+    .sort_values("F1_drop", ascending=False)
+)
+
+print("\n=== F1 degradation from jitter ===")
+print(degradation.to_string(index=False))
+```
+

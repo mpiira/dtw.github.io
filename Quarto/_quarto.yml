@@ -1,0 +1,24 @@
+project:
+  type: book
+  output-dir: _site
+
+book:
+  title: "ADSP 31006 ON02 Final Project - Group 3"
+  author: "Maja Ivanovic, Victoria Li, Kathleen Nie, Mpiira Tabuti"
+  date: today
+  chapters:
+    - index.qmd
+    - core_idea.qmd
+    - empirical_demonstration.qmd
+    - evaluation_and_critique.qmd
+
+execute:
+  freeze: true
+
+format:
+  html:
+    theme: default
+    toc: true
+    toc-depth: 2
+    code-copy: true
+    code-overflow: wrap

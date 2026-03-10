@@ -1,5 +1,4 @@
 ## Core Idea
-
 ---
 title: "Dynamic Time Warping — Core Ideas"
 subtitle: "ECG200 Illustration · Time Series Analysis Final Project"

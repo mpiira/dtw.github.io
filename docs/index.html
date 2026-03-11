@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Final Project</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-title">Final Project</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -146,26 +146,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Final Project</span></span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Final Project</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./core_idea.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Core Ideas</span></span></a>
+  <a href="./core_idea.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Core Ideas</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./empirical_demonstration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">empirical demonstration</span></span></a>
+  <a href="./empirical_demonstration.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">empirical demonstration</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./evaluation_and_critique.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Evaluation and Critique</span></span></a>
+  <a href="./evaluation_and_critique.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Evaluation and Critique</span></a>
   </div>
 </li>
     </ul>
@@ -178,8 +174,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul class="collapse">
-  <li><a href="#a.-normal-un-transformed-data" id="toc-a.-normal-un-transformed-data" class="nav-link active" data-scroll-target="#a.-normal-un-transformed-data"><span class="header-section-number">1</span> A. Normal un-transformed data</a></li>
-  <li><a href="#b.-phase-shifted-data" id="toc-b.-phase-shifted-data" class="nav-link" data-scroll-target="#b.-phase-shifted-data"><span class="header-section-number">2</span> B. Phase shifted data</a></li>
+  <li><a href="#a.-normal-un-transformed-data" id="toc-a.-normal-un-transformed-data" class="nav-link active" data-scroll-target="#a.-normal-un-transformed-data">A. Normal un-transformed data</a></li>
+  <li><a href="#b.-phase-shifted-data" id="toc-b.-phase-shifted-data" class="nav-link" data-scroll-target="#b.-phase-shifted-data">B. Phase shifted data</a></li>
   </ul>
 </nav>
     </div>
@@ -207,8 +203,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Course: ADSP 31006 ON02 Time Series Analysis and Forecasting</p>
 <p>Students: Maja Ivanovic, Victoria Li, Kathleen Nie, Mpiira Tabuti</p>
-<section id="dependencies-data-import-and-helper-functions" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1" class="anchored" data-anchor-id="dependencies-data-import-and-helper-functions"><span class="header-section-number">0.0.1</span> 0. Dependencies, data import, and helper functions</h3>
+<section id="dependencies-data-import-and-helper-functions" class="level3">
+<h3 class="anchored" data-anchor-id="dependencies-data-import-and-helper-functions">0. Dependencies, data import, and helper functions</h3>
 <div id="4f6d8f46" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd  </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -257,10 +253,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dtw.distance(u, v)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="a.-normal-un-transformed-data" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> A. Normal un-transformed data</h1>
-<section id="a.1.-pre-processing" class="level3" data-number="1.0.1">
-<h3 data-number="1.0.1" class="anchored" data-anchor-id="a.1.-pre-processing"><span class="header-section-number">1.0.1</span> A.1. Pre-processing</h3>
+<section id="a.-normal-un-transformed-data" class="level1">
+<h1>A. Normal un-transformed data</h1>
+<section id="a.1.-pre-processing" class="level3">
+<h3 class="anchored" data-anchor-id="a.1.-pre-processing">A.1. Pre-processing</h3>
 <div id="630a8c56" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Load TRAIN ---</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.read_csv(</span>
@@ -284,8 +280,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>X_test  <span class="op">=</span> df_test.iloc[:, <span class="dv">1</span>:].values</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="a.3.-load-and-apply-models" class="level3" data-number="1.0.2">
-<h3 data-number="1.0.2" class="anchored" data-anchor-id="a.3.-load-and-apply-models"><span class="header-section-number">1.0.2</span> A.3. Load and apply models</h3>
+<section id="a.3.-load-and-apply-models" class="level3">
+<h3 class="anchored" data-anchor-id="a.3.-load-and-apply-models">A.3. Load and apply models</h3>
 <div id="4dd3f517" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model_files <span class="op">=</span> {</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"knn_dtw_k5"</span>: MODELS_DIR <span class="op">/</span> <span class="st">"knn_dtw_k5.pkl"</span>,</span>
@@ -345,10 +341,10 @@ knn_euclidean_k5      0.90   0.897059              0.953125     0.805556 0.92424
 </div>
 </section>
 </section>
-<section id="b.-phase-shifted-data" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> B. Phase shifted data</h1>
-<section id="b.1.-pre-processing" class="level3" data-number="2.0.1">
-<h3 data-number="2.0.1" class="anchored" data-anchor-id="b.1.-pre-processing"><span class="header-section-number">2.0.1</span> B.1. Pre-processing</h3>
+<section id="b.-phase-shifted-data" class="level1">
+<h1>B. Phase shifted data</h1>
+<section id="b.1.-pre-processing" class="level3">
+<h3 class="anchored" data-anchor-id="b.1.-pre-processing">B.1. Pre-processing</h3>
 <div id="043ace26" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>RNG <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span>RANDOM_STATE)   </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -389,14 +385,14 @@ Test  jitter — min: -20  max: +20  mean: -0.37</code></pre>
 </div>
 </div>
 </section>
-<section id="b.2.-build-and-save-classification-models" class="level3" data-number="2.0.2">
-<h3 data-number="2.0.2" class="anchored" data-anchor-id="b.2.-build-and-save-classification-models"><span class="header-section-number">2.0.2</span> B.2. Build and save classification models</h3>
+<section id="b.2.-build-and-save-classification-models" class="level3">
+<h3 class="anchored" data-anchor-id="b.2.-build-and-save-classification-models">B.2. Build and save classification models</h3>
 <div id="d03ab0be" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Continue to use models from A.2.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="b.3.-load-and-apply-models" class="level3" data-number="2.0.3">
-<h3 data-number="2.0.3" class="anchored" data-anchor-id="b.3.-load-and-apply-models"><span class="header-section-number">2.0.3</span> B.3. Load and apply models</h3>
+<section id="b.3.-load-and-apply-models" class="level3">
+<h3 class="anchored" data-anchor-id="b.3.-load-and-apply-models">B.3. Load and apply models</h3>
 <div id="9a8321bf" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model_files <span class="op">=</span> {</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"knn_dtw_k5"</span>:       MODELS_DIR <span class="op">/</span> <span class="st">"knn_dtw_k5.pkl"</span>,</span>
@@ -875,7 +871,7 @@ knn_euclidean_k5  0.924242 0.543860 0.380383
   </div>
   <div class="nav-page nav-page-next">
       <a href="./core_idea.html" class="pagination-link" aria-label="Core Ideas">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Core Ideas</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">Core Ideas</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

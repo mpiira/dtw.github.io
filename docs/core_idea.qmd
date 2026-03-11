@@ -1,4 +1,4 @@
-## Core Idea
+## Core Idea {.unnumbered}
 ---
 title: "Core Ideas"
 subtitle: "ECG200 Illustration · Time Series Analysis Final Project"

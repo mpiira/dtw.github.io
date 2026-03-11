@@ -1,4 +1,4 @@
-## Evaluation and Critique
+## Evaluation and Critique {.unnumbered}
 
 DTW measures similarity between time series that may be misaligned in time. Instead of comparing points strictly at the same time index, it allows the time axis to stretch or compress locally to find the best alignment between two sequences.
 

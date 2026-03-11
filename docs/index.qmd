@@ -8,7 +8,7 @@ Course: ADSP 31006 ON02 Time Series Analysis and Forecasting
 Students: Maja Ivanovic, Victoria Li, Kathleen Nie, Mpiira Tabuti
 
 
-### 0. Dependencies, data import, and helper functions
+### 0. Dependencies, data import, and helper functions {.unnumbered}
 
 ```{python}
 import pandas as pd  

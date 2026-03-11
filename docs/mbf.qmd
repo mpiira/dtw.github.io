@@ -1,0 +1,101 @@
+---
+title: "Motivation by failure"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Contents"
+    number-sections: false
+    theme: cosmo
+    code-fold: true
+    code-tools: true
+    highlight-style: github
+    fig-align: center
+    embed-resources: true
+execute:
+  warning: false
+  message: false
+---
+
+### New Paradigms {.unnumbered}
+![](Assets/MBF_1.png){fig-align="center" width="100%"}
+
+### Ideal Universe 
+![**Figure 2.** 2 Aligned time series](Assets/MBF_2.png){fig-align="center" width="100%"}
+
+### Time series in the real world
+![](Assets/MBF_3.png){fig-align="center" width="100%"}
+![**Figures 3.a. and 3.b.** 2 Phase and scale shifted time series](Assets/MBF_4.png){fig-align="center" width="90%"}
+
+### Dynamic Time Warping
+![](Assets/MBF_5.png){fig-align="center" width="100%"}
+
+::: {.callout-note title="Point-by-Point Matching example"}
+```
+Euclidean distance
+
+M  E  O  W
+|  |  |  |
+M  E  O  W
+
+
+Dynamic Time Warping
+
+M  E  O              W
+|  |  |\⟍            |
+|  |  | \ ⟍          |
+|  |  |  \  ⟍        |
+|  |  |   \   ⟍      |
+M  E  O    O    O    W
+```
+:::
+
+
+### Empirical demonstration and Performance metrics
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+
+library(tidyverse)
+library(gt)
+
+summary_clean <- read_csv("ECG200/results/summary_clean.csv")
+summary_jitter <- read_csv("ECG200/results/summary_jitter.csv")
+summary_f1_drop <- read_csv("ECG200/results/summary_f1_drop.csv")
+```
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+
+summary_clean |>
+  gt() |>
+  tab_header(title = "Model Evaluation : Aligned Data") |>
+  fmt_number(columns = where(is.numeric), decimals = 3) |>
+  data_color(columns = Accuracy, palette = "Blues")
+```
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+
+summary_jitter |>
+  gt() |>
+  tab_header(title = "Model Evaluation : Phase shifted data") |>
+  fmt_number(columns = where(is.numeric), decimals = 3) |>
+  data_color(columns = Accuracy, palette = "Oranges")
+```
+
+```{r}
+summary_f1_drop |>
+  gt() |>
+  tab_header(title = "F1 Degradation from phase shift") |>
+  fmt_number(columns = where(is.numeric), decimals = 3) |>
+  data_color(columns = F1_drop, palette = "Reds")
+```
+
+### Why this matters
+![**Figure 5.** 2 Cluster centres](Assets/MBF_7.png){fig-align="center" width="100%"}

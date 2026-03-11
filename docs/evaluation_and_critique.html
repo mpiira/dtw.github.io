@@ -118,13 +118,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./core_idea.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Core Idea</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dynamic Time Warping — Core Ideas</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./empirical_demonstration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Empirical Demonstration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">empirical demonstration</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -163,6 +163,96 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>DTW measures similarity between time series that may be misaligned in time. Instead of comparing points strictly at the same time index, it allows the time axis to stretch or compress locally to find the best alignment between two sequences.</p>
+<ul>
+<li>Assumes that two signals may represent the same underlying pattern, occurring at different speeds.</li>
+<li>Assumes that local timing differences are not meaningful differences in the signal itself.</li>
+<li>Similarity defined as the minimum cumulative distance along an optimal alignment path through a cost matrix</li>
+</ul>
+<p>Very useful in our example of diagnosing STEMI, where global shape is the most important attribute, and timing or beat length (heart rate) are less crucial to making the diagnosis.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../Assets/STEMI_1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>STEMI</figcaption>
+</figure>
+</div>
+<p>Another good use is for respiratory variation in heart rate:</p>
+<p>This is a normal heart rate, with variation due to respiration. DTW would be able to recognize the similar underlying pattern occuring at slightly different speeds:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../Assets/EKG_resp.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Normal Heart Rate with Respiratory Variation</figcaption>
+</figure>
+</div>
+<p><span style="font-size:24px;"><b>DTW can be problematic or misleading in several scenarios</b></span></p>
+<p><strong>Scenario 1: When timing is important</strong></p>
+<p>Example: Heart rate is meaningful, and slow rates can be dangerous (bradycardia). DTW alignment may ignore important information on rates:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../Assets/EKG_brady.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Normal Heart Rate vs Bradycardia</figcaption>
+</figure>
+</div>
+<p><strong>Scenario 2: When excessive warping creates inappropriate matches:</strong></p>
+<p>Example: Extreme stretching may lead to inappropriate alighnment, in this is example a large pause in heart beat may be ignored.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../Assets/EKG_pause.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Normal Heart Rate vs Heart Block</figcaption>
+</figure>
+</div>
+<p><strong>Scenario 3: When Amplitude or Magnitude is important</strong></p>
+<p>DTW primarily aligns on shape, and may not capture important magnitude differences. Additionally, normalization used in many DTW workflows may ignore magnitude differences.</p>
+<p>Example: Difference in wave amplitudes can indicate a life-threatening pericardial effusion (fluid around the heart), which may be minimized with DTW.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../Assets/EKG_altern.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Electrical Alternans</figcaption>
+</figure>
+</div>
+<p><strong>Scenario 4: When there is noisy signal, which could lead to over-fitting of noise</strong></p>
+<p>DTW may over emphasize pattern fitting, and over-fit to noise.</p>
+<p>Example: When a patient is moving, signal can become noisy and be misinterpreted for cardiac activity.</p>
+<p><img src="../Assets/EKG_noise2.png" class="img-fluid quarto-figure quarto-figure-center" style="width:70.0%" alt="Normal EKG signal"> <img src="../Assets/EKG_noise.png" class="img-fluid quarto-figure quarto-figure-center" style="width:70.0%" alt="Noisy EKG signal"></p>
+<p><strong>Scenario 5: Flexibility may lead to over-alignment of unrelated signals coming from entirely different processes</strong></p>
+<p>DTW is flexible and can align signals that may be generated by a different process.</p>
+<p>Example: EKG and EEG (brain wave) could be mistakenly aligned.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../Assets/EEG.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>EEG (brain waves)</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../Assets/EKG_wide.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>EGC with wide QRS (Ventricular Tachycardia)</figcaption>
+</figure>
+</div>
+<p><span style="font-size:24px;"><b>Useful Constraints can help address these scenarios</b></span></p>
+<p><strong>1. Warping path constraints</strong></p>
+<ul>
+<li>These restrict how far the warping path can deviate from the diagonal of the cost matrix.</li>
+</ul>
+<p>Example: Sakoe–Chiba band</p>
+<p>Effects: - Limits how far in time two points can be matched (width = w) - Prevents extreme stretching (e.g., one point matched to 50 points)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../Assets/Sakoe_chiba.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Sakoe-chiba band</figcaption>
+</figure>
+</div>
+<p><strong>2. Step pattern constraints</strong></p>
+<ul>
+<li>Local slope constraints which restrict the how path can move locally</li>
+</ul>
+<p>Effects: - Prevents extreme compression/stretching - Avoids matching one point to many points</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../Assets/Step_size.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Step-size constraints</figcaption>
+</figure>
+</div>
 
 
 
@@ -569,8 +659,8 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./empirical_demonstration.html" class="pagination-link" aria-label="Empirical Demonstration">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Empirical Demonstration</span></span>
+      <a href="./empirical_demonstration.html" class="pagination-link" aria-label="empirical demonstration">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">empirical demonstration</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

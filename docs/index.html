@@ -23,41 +23,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -68,7 +33,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./core_idea.html" rel="next">
+<link href="./mbf.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -119,7 +84,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-title">Final Project</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-title">Intro</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -146,7 +111,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Final Project</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Intro</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mbf.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Motivation by failure</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -172,15 +142,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul class="collapse">
-  <li><a href="#a.-normal-un-transformed-data" id="toc-a.-normal-un-transformed-data" class="nav-link active" data-scroll-target="#a.-normal-un-transformed-data">A. Normal un-transformed data</a></li>
-  <li><a href="#b.-phase-shifted-data" id="toc-b.-phase-shifted-data" class="nav-link" data-scroll-target="#b.-phase-shifted-data">B. Phase shifted data</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -206,267 +169,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Course: ADSP 31006 ON02 Time Series Analysis and Forecasting</p>
 <p>Students: Maja Ivanovic, Victoria Li, Kathleen Nie, Mpiira Tabuti</p>
-<section id="dependencies-data-import-and-helper-functions" class="level3">
-<h3 class="anchored" data-anchor-id="dependencies-data-import-and-helper-functions">0. Dependencies, data import, and helper functions</h3>
-<div id="4f6d8f46" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd  </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> joblib</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dtaidistance <span class="im">import</span> dtw</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> (</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    RandomForestClassifier,</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    RandomForestRegressor</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> (</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    confusion_matrix,</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    ConfusionMatrixDisplay,</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    accuracy_score,</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    precision_score,</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    recall_score,</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    f1_score,</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    roc_auc_score,</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    classification_report,</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    balanced_accuracy_score,</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="e8687246" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>DATA_DIR     <span class="op">=</span> Path(<span class="st">"../ECG200"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>MODELS_DIR   <span class="op">=</span> Path(<span class="st">"../models"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>RANDOM_STATE <span class="op">=</span> <span class="dv">42</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="91f1c5b0" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dtw_distance(u, v):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dtw.distance(u, v)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="a.-normal-un-transformed-data" class="level1">
-<h1>A. Normal un-transformed data</h1>
-<section id="a.1.-pre-processing" class="level3">
-<h3 class="anchored" data-anchor-id="a.1.-pre-processing">A.1. Pre-processing</h3>
-<div id="630a8c56" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Load TRAIN ---</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.read_csv(</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    DATA_DIR <span class="op">/</span> <span class="st">"ECG200_TRAIN.txt"</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    sep<span class="op">=</span><span class="st">'</span><span class="er">\</span><span class="st">s+'</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    header<span class="op">=</span><span class="va">None</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Load </span><span class="al">TEST</span><span class="co"> ---</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.read_csv(</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    DATA_DIR <span class="op">/</span> <span class="st">"ECG200_TEST.txt"</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    sep<span class="op">=</span><span class="st">'</span><span class="er">\</span><span class="st">s+'</span>,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    header<span class="op">=</span><span class="va">None</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Split into features and labels ---</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> df_train.iloc[:, <span class="dv">0</span>].values</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> df_train.iloc[:, <span class="dv">1</span>:].values</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>y_test  <span class="op">=</span> df_test.iloc[:, <span class="dv">0</span>].values</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>X_test  <span class="op">=</span> df_test.iloc[:, <span class="dv">1</span>:].values</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="a.3.-load-and-apply-models" class="level3">
-<h3 class="anchored" data-anchor-id="a.3.-load-and-apply-models">A.3. Load and apply models</h3>
-<div id="4dd3f517" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model_files <span class="op">=</span> {</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"knn_dtw_k5"</span>: MODELS_DIR <span class="op">/</span> <span class="st">"knn_dtw_k5.pkl"</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"knn_euclidean_k5"</span>: MODELS_DIR <span class="op">/</span> <span class="st">"knn_euclidean_k5.pkl"</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"logreg"</span>: MODELS_DIR <span class="op">/</span> <span class="st">"logreg.pkl"</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"svm_rbf"</span>: MODELS_DIR <span class="op">/</span> <span class="st">"svm_rbf.pkl"</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, path <span class="kw">in</span> model_files.items():</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> joblib.load(path)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> model.predict(X_test)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">hasattr</span>(model, <span class="st">"predict_proba"</span>):</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        y_prob <span class="op">=</span> model.predict_proba(X_test)[:, <span class="dv">1</span>]</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        y_prob <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    tn, fp, fn, tp <span class="op">=</span> confusion_matrix(y_test, y_pred, labels<span class="op">=</span>[<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>]).ravel()</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    precision <span class="op">=</span> precision_score(y_test, y_pred, pos_label<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    recall <span class="op">=</span> recall_score(y_test, y_pred, pos_label<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    specificity <span class="op">=</span> tn <span class="op">/</span> (tn <span class="op">+</span> fp)</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> f1_score(y_test, y_pred, pos_label<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    bal_acc <span class="op">=</span> balanced_accuracy_score(y_test, y_pred)</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> roc_auc_score(y_test, y_prob) <span class="cf">if</span> y_prob <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="cf">else</span> np.nan</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    rows.append({</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Model"</span>: name,</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Accuracy"</span>: accuracy,</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Precision"</span>: precision,</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Recall (Sensitivity)"</span>: recall,</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Specificity"</span>: specificity,</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">"F1"</span>: f1,</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Balanced_Accuracy"</span>: bal_acc,</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">"AUC"</span>: auc,</span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame(rows).sort_values(by<span class="op">=</span><span class="st">"F1"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Model Evaluation Summary (Test Set) ==="</span>)</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results_df.to_string(index<span class="op">=</span><span class="va">False</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-=== Model Evaluation Summary (Test Set) ===
-           Model  Accuracy  Precision  Recall (Sensitivity)  Specificity       F1  Balanced_Accuracy      AUC
-knn_euclidean_k5      0.90   0.897059              0.953125     0.805556 0.924242           0.879340 0.953776
-         svm_rbf      0.87   0.880597              0.921875     0.777778 0.900763           0.849826 0.931424
-          logreg      0.84   0.900000              0.843750     0.833333 0.870968           0.838542 0.910156
-      knn_dtw_k5      0.79   0.802817              0.890625     0.611111 0.844444           0.750868 0.916667</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="b.-phase-shifted-data" class="level1">
-<h1>B. Phase shifted data</h1>
-<section id="b.1.-pre-processing" class="level3">
-<h3 class="anchored" data-anchor-id="b.1.-pre-processing">B.1. Pre-processing</h3>
-<div id="043ace26" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>RNG <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span>RANDOM_STATE)   </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> jitter_series(X, max_shift<span class="op">=</span><span class="dv">20</span>):</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return a copy of X where every row is circularly shifted by a</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">    random integer in [-max_shift, max_shift]."""</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    shifts <span class="op">=</span> RNG.integers(<span class="op">-</span>max_shift, max_shift <span class="op">+</span> <span class="dv">1</span>, size<span class="op">=</span><span class="bu">len</span>(X))</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([np.roll(row, s) <span class="cf">for</span> row, s <span class="kw">in</span> <span class="bu">zip</span>(X, shifts)]), shifts</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>X_train_jit, shifts_train <span class="op">=</span> jitter_series(X_train)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>X_test_jit,  shifts_test  <span class="op">=</span> jitter_series(X_test)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Train jitter — min: </span><span class="sc">{</span>shifts_train<span class="sc">.</span><span class="bu">min</span>()<span class="sc">:+d}</span><span class="ss">  max: </span><span class="sc">{</span>shifts_train<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:+d}</span><span class="ss">  "</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"mean: </span><span class="sc">{</span>shifts_train<span class="sc">.</span>mean()<span class="sc">:+.2f}</span><span class="ss">"</span>)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test  jitter — min: </span><span class="sc">{</span>shifts_test<span class="sc">.</span><span class="bu">min</span>()<span class="sc">:+d}</span><span class="ss">  max: </span><span class="sc">{</span>shifts_test<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:+d}</span><span class="ss">  "</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"mean: </span><span class="sc">{</span>shifts_test<span class="sc">.</span>mean()<span class="sc">:+.2f}</span><span class="ss">"</span>)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Sanity check: one original time series vs. its jittered version ---</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>idx <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot(X_train[idx], label<span class="op">=</span><span class="st">"Original"</span>, color<span class="op">=</span><span class="st">"steelblue"</span>)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="ss">f"Train series </span><span class="sc">{</span>idx<span class="sc">}</span><span class="ss">  (label=</span><span class="sc">{</span>y_train[idx]<span class="sc">:.0f}</span><span class="ss">)"</span>)</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].legend()</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot(X_train_jit[idx], label<span class="op">=</span><span class="ss">f"Jittered (shift=</span><span class="sc">{</span>shifts_train[idx]<span class="sc">:+d}</span><span class="ss">)"</span>, color<span class="op">=</span><span class="st">"tomato"</span>)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].legend()</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Train jitter — min: -19  max: +20  mean: +1.07
-Test  jitter — min: -20  max: +20  mean: -0.37</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-7-output-2.png" width="950" height="374" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="b.2.-build-and-save-classification-models" class="level3">
-<h3 class="anchored" data-anchor-id="b.2.-build-and-save-classification-models">B.2. Build and save classification models</h3>
-<div id="d03ab0be" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Continue to use models from A.2.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="b.3.-load-and-apply-models" class="level3">
-<h3 class="anchored" data-anchor-id="b.3.-load-and-apply-models">B.3. Load and apply models</h3>
-<div id="9a8321bf" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model_files <span class="op">=</span> {</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"knn_dtw_k5"</span>:       MODELS_DIR <span class="op">/</span> <span class="st">"knn_dtw_k5.pkl"</span>,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"knn_euclidean_k5"</span>: MODELS_DIR <span class="op">/</span> <span class="st">"knn_euclidean_k5.pkl"</span>,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"logreg"</span>:           MODELS_DIR <span class="op">/</span> <span class="st">"logreg.pkl"</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"svm_rbf"</span>:          MODELS_DIR <span class="op">/</span> <span class="st">"svm_rbf.pkl"</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>rows_jit <span class="op">=</span> []</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, path <span class="kw">in</span> model_files.items():</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> joblib.load(path)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> model.predict(X_test_jit)</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">hasattr</span>(model, <span class="st">"predict_proba"</span>):</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        y_prob <span class="op">=</span> model.predict_proba(X_test_jit)[:, <span class="dv">1</span>]</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        y_prob <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    tn, fp, fn, tp <span class="op">=</span> confusion_matrix(y_test, y_pred, labels<span class="op">=</span>[<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>]).ravel()</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    rows_jit.append({</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Model"</span>:                name,</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Accuracy"</span>:             accuracy_score(y_test, y_pred),</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Precision"</span>:            precision_score(y_test, y_pred, pos_label<span class="op">=</span><span class="dv">1</span>),</span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Recall (Sensitivity)"</span>: recall_score(y_test, y_pred, pos_label<span class="op">=</span><span class="dv">1</span>),</span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Specificity"</span>:          tn <span class="op">/</span> (tn <span class="op">+</span> fp),</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">"F1"</span>:                   f1_score(y_test, y_pred, pos_label<span class="op">=</span><span class="dv">1</span>),</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Balanced_Accuracy"</span>:    balanced_accuracy_score(y_test, y_pred),</span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">"AUC"</span>:                  roc_auc_score(y_test, y_prob) <span class="cf">if</span> y_prob <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="cf">else</span> np.nan,</span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>results_jit_df <span class="op">=</span> pd.DataFrame(rows_jit).sort_values(<span class="st">"F1"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Jittered Test Set (trained on clean) ==="</span>)</span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results_jit_df.to_string(index<span class="op">=</span><span class="va">False</span>))</span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Degradation vs. original clean results ---</span></span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>degradation <span class="op">=</span> (</span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    results_df[[<span class="st">"Model"</span>, <span class="st">"F1"</span>]]</span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="st">"F1"</span>: <span class="st">"F1_clean"</span>})</span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>    .merge(results_jit_df[[<span class="st">"Model"</span>, <span class="st">"F1"</span>]], on<span class="op">=</span><span class="st">"Model"</span>)</span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>    .assign(F1_drop<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"F1_clean"</span>] <span class="op">-</span> d[<span class="st">"F1"</span>])</span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>    .sort_values(<span class="st">"F1_drop"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== F1 degradation from jitter ==="</span>)</span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(degradation.to_string(index<span class="op">=</span><span class="va">False</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-=== Jittered Test Set (trained on clean) ===
-           Model  Accuracy  Precision  Recall (Sensitivity)  Specificity       F1  Balanced_Accuracy      AUC
-      knn_dtw_k5      0.70   0.729730              0.843750     0.444444 0.782609           0.644097 0.720703
-          logreg      0.60   0.785714              0.515625     0.750000 0.622642           0.632812 0.638889
-knn_euclidean_k5      0.48   0.620000              0.484375     0.472222 0.543860           0.478299 0.482205
-         svm_rbf      0.56   0.833333              0.390625     0.861111 0.531915           0.625868 0.660590
-
-=== F1 degradation from jitter ===
-           Model  F1_clean       F1  F1_drop
-knn_euclidean_k5  0.924242 0.543860 0.380383
-         svm_rbf  0.900763 0.531915 0.368848
-          logreg  0.870968 0.622642 0.248326
-      knn_dtw_k5  0.844444 0.782609 0.061836</code></pre>
-</div>
-</div>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -873,8 +577,8 @@ knn_euclidean_k5  0.924242 0.543860 0.380383
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./core_idea.html" class="pagination-link" aria-label="Core Ideas">
-        <span class="nav-page-text">Core Ideas</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./mbf.html" class="pagination-link" aria-label="Motivation by failure">
+        <span class="nav-page-text"><span class="chapter-title">Motivation by failure</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

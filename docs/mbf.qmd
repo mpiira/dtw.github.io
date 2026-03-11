@@ -57,7 +57,7 @@ M  E  O    O    O    W
 #| echo: false
 #| warning: false
 
-library(tidyverse)
+library(readr)
 library(gt)
 
 summary_clean <- read_csv("ECG200/results/summary_clean.csv")

@@ -14,7 +14,7 @@ Another good use is for respiratory variation in heart rate:
 
 This is a normal heart rate, with variation due to respiration. DTW would be able to recognize the similar underlying pattern occuring at slightly different speeds: 
 
-![Normal Heart Rate with Respiratory Variation](../Assets/EKG_resp.png){width=70% fig-align="center"}
+![Normal Heart Rate with Respiratory Variation](Assets/EKG_resp.png){width=70% fig-align="center"}
 
 <span style="font-size:24px;"><b>DTW can be problematic or misleading in several scenarios</b></span>
 
@@ -22,7 +22,7 @@ This is a normal heart rate, with variation due to respiration. DTW would be abl
 
 Example: Heart rate is meaningful, and slow rates can be dangerous (bradycardia). DTW alignment may ignore important information on rates:
 
-![Normal Heart Rate vs Bradycardia](../Assets/EKG_brady.png){width=70% fig-align="center"}
+![Normal Heart Rate vs Bradycardia](Assets/EKG_brady.png){width=70% fig-align="center"}
 
 **Scenario 2: When excessive warping creates inappropriate matches:**
 
@@ -37,7 +37,7 @@ DTW primarily aligns on shape, and may not capture important magnitude differenc
 
 Example: Difference in wave amplitudes can indicate a life-threatening pericardial effusion (fluid around the heart), which may be minimized with DTW. 
 
-![Electrical Alternans](../Assets/EKG_altern.png){width=100% fig-align="center"}
+![Electrical Alternans](Assets/EKG_altern.png){width=100% fig-align="center"}
 
 **Scenario 4: When there is noisy signal, which could lead to over-fitting of noise**
 

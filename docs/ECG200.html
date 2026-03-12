@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; ECG200 Data – ADSP 31006 ON02 Final Project - Group 3</title>
+<title>ECG200 Data – ADSP 31006 ON02 Final Project - Group 3</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -215,8 +215,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="the-ecg200-dataset" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="the-ecg200-dataset">The ECG200 Dataset</h3>
-<section id="what-is-an-ecg-signal" class="level4" data-number="2.0.0.1">
-<h4 data-number="2.0.0.1" class="anchored" data-anchor-id="what-is-an-ecg-signal"><span class="header-section-number">2.0.0.1</span> What Is an ECG Signal?</h4>
+<section id="what-is-an-ecg-signal" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-an-ecg-signal">What Is an ECG Signal?</h4>
 <p>An <strong>electrocardiogram (ECG)</strong> is a recording of the electrical activity of the heart over time. Electrodes placed on the skin detect tiny voltages as the heart muscle depolarises (contracts) and repolarises (relaxes). The resulting waveform has a characteristic repeating shape composed of three main features:</p>
 <ul>
 <li><strong>P wave</strong> — atrial depolarisation (atria contract)</li>
@@ -231,8 +231,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Abnormalities in the shape, duration, or timing of these components can indicate myocardial infarction (heart attack), arrhythmia, and other cardiac conditions. This is why a distance metric that is robust to small timing shifts matters — we want to compare <em>shape</em>, not penalise the algorithm for minor beat-to-beat timing variation inherent in any real recording.</p>
 </section>
-<section id="dataset-description" class="level4" data-number="2.0.0.2">
-<h4 data-number="2.0.0.2" class="anchored" data-anchor-id="dataset-description"><span class="header-section-number">2.0.0.2</span> Dataset Description</h4>
+<section id="dataset-description" class="level4">
+<h4 class="anchored" data-anchor-id="dataset-description">Dataset Description</h4>
 <p>The <strong>ECG200</strong> dataset was assembled by Olszewski (2001) and is distributed through the <a href="https://www.timeseriesclassification.com/description.php?Dataset=ECG200">UCR Time Series Classification Archive</a>. Each observation is a <strong>single heartbeat</strong> extracted from a longer Holter monitor recording and resampled to <strong>96 equally spaced time points</strong>.</p>
 <table class="caption-top table">
 <thead>
@@ -270,8 +270,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>The binary label identifies whether the beat originated from a <strong>normal</strong> heartbeat (+1) or from a patient with a <strong>myocardial infarction</strong> (−1). The UCR Archive notes that MI beats tend to show a depressed or absent R wave, ST-segment changes, and other morphological deformations. These features manifest as time-localised shape differences between the two classes, making ECG200 a natural and well-studied benchmark for DTW-based classification.</p>
 </section>
-<section id="visualising-the-data" class="level4" data-number="2.0.0.3">
-<h4 data-number="2.0.0.3" class="anchored" data-anchor-id="visualising-the-data"><span class="header-section-number">2.0.0.3</span> Visualising the Data</h4>
+<section id="visualising-the-data" class="level4">
+<h4 class="anchored" data-anchor-id="visualising-the-data">Visualising the Data</h4>
 <p>The two classes look clearly different <em>on average</em>: normal beats (blue) show a pronounced, sharp R-wave spike while MI beats (red) exhibit a flatter, broader profile. Notice also the ±1 SD shaded band — even within the normal class, the exact <em>timing</em> of the R-wave peak varies from beat to beat, motivating the use of a timing-invariant distance measure like DTW.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -288,8 +288,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <hr>
 </section>
-<section id="references" class="level4" data-number="2.0.0.4">
-<h4 data-number="2.0.0.4" class="anchored" data-anchor-id="references"><span class="header-section-number">2.0.0.4</span> References</h4>
+<section id="references" class="level4">
+<h4 class="anchored" data-anchor-id="references">References</h4>
 <p>UCR Time Series Classification Archive. (n.d.). <em>ECG200 dataset description.</em> <a href="https://www.timeseriesclassification.com/description.php?Dataset=ECG200" class="uri">https://www.timeseriesclassification.com/description.php?Dataset=ECG200</a></p>
 
 
@@ -769,7 +769,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 3</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-title: "Contents"</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: false</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: cosmo</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>

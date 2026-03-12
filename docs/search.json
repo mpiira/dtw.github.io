@@ -48,5 +48,15 @@
     "crumbs": [
       "Evaluation and Critique"
     ]
+  },
+  {
+    "objectID": "empirical_demonstration.html",
+    "href": "empirical_demonstration.html",
+    "title": "Empirical Demonstration",
+    "section": "",
+    "text": "This section shows what DTW adds beyond a standard point-by-point distance. Euclidean distance compares beats at the same time index. DTW allows small local timing shifts, so it can match beats by overall shape rather than exact alignment in time.\nComparing DTW with Euclidean distance\nThese two figures use the same query beat but change the similarity metric.\nWith Euclidean distance, the nearest neighbor comes from the wrong class. The pointwise comparison looks close, but it misses the more meaningful shape match.\n\n\n\nEuclidean nearest neighbor for the query beat: pointwise similarity returns a different-class match\n\n\nWith DTW, the nearest neighbor comes from the correct class. Allowing local time warping recovers a beat with more similar overall morphology.\n\n\n\nDTW nearest neighbor for the same query beat: shape-based matching returns a same-class match\n\n\nMain takeaway: DTW changes the retrieval result in a way that better reflects the underlying shape of the signal.\nUseful alignment\nThis is a case where DTW is doing something useful. The two beats are both labeled MI. Their main features are similar, but they occur at slightly different time locations.\n\n\n\nUseful alignment: two MI beats with similar shape but imperfect timing alignment\n\n\nThe warping path moves away from the diagonal in a controlled way. That means DTW is making small timing adjustments so the major waveform components line up better.\n\n\n\nUseful alignment warping path: local timing adjustments align similar MI beats\n\n\nMain takeaway: this is the setting DTW is built for, similar shape with mild timing variation.\nUnhelpful alignment\nDTW can also align the wrong thing. These two beats come from different classes, but DTW still finds a reasonably close match because part of the broad shape looks similar.\n\n\n\nUnhelpful alignment: different-class beats that still appear similar under DTW\n\n\nThe warping path does not look extreme, which makes this a subtle failure. The alignment is numerically reasonable, but not clinically meaningful.\n\n\n\nUnhelpful alignment warping path: a reasonable-looking path can still support a misleading match\n\n\nMain takeaway: DTW measures shape similarity under flexible timing, not scientific relevance. In settings like fetal monitoring, a method could align a repeating maternal heartbeat pattern well even if that is not the signal of interest.\nBottom line\nDTW helps when timing differences are nuisance variation and shape is what matters. But a low DTW distance is not enough on its own. The match still has to make sense in the domain.",
+    "crumbs": [
+      "Empirical Demonstration"
+    ]
   }
 ]

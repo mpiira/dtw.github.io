@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>empirical demonstration – ADSP 31006 ON02 Final Project - Group 3</title>
+<title>Empirical Demonstration – ADSP 31006 ON02 Final Project - Group 3</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -85,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./empirical_demonstration.html">empirical demonstration</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./empirical_demonstration.html">Empirical Demonstration</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -133,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./empirical_demonstration.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">empirical demonstration</span></a>
+ <span class="menu-text">Empirical Demonstration</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -155,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">empirical demonstration</h1>
+<h1 class="title">Empirical Demonstration</h1>
 </div>
 
 
@@ -172,6 +172,58 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>This section shows what DTW adds beyond a standard point-by-point distance. Euclidean distance compares beats at the same time index. DTW allows small local timing shifts, so it can match beats by overall shape rather than exact alignment in time.</p>
+<p><span style="font-size:24px;"><b>Comparing DTW with Euclidean distance</b></span></p>
+<p>These two figures use the same query beat but change the similarity metric.</p>
+<p>With Euclidean distance, the nearest neighbor comes from the wrong class. The pointwise comparison looks close, but it misses the more meaningful shape match.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Assets/DTW 1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Euclidean nearest neighbor for the query beat: pointwise similarity returns a different-class match</figcaption>
+</figure>
+</div>
+<p>With DTW, the nearest neighbor comes from the correct class. Allowing local time warping recovers a beat with more similar overall morphology.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Assets/DTW 2.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>DTW nearest neighbor for the same query beat: shape-based matching returns a same-class match</figcaption>
+</figure>
+</div>
+<p>Main takeaway: DTW changes the retrieval result in a way that better reflects the underlying shape of the signal.</p>
+<p><span style="font-size:24px;"><b>Useful alignment</b></span></p>
+<p>This is a case where DTW is doing something useful. The two beats are both labeled MI. Their main features are similar, but they occur at slightly different time locations.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Assets/DTW 3.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Useful alignment: two MI beats with similar shape but imperfect timing alignment</figcaption>
+</figure>
+</div>
+<p>The warping path moves away from the diagonal in a controlled way. That means DTW is making small timing adjustments so the major waveform components line up better.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Assets/DTW 4.png" class="img-fluid figure-img" style="width:75.0%"></p>
+<figcaption>Useful alignment warping path: local timing adjustments align similar MI beats</figcaption>
+</figure>
+</div>
+<p>Main takeaway: this is the setting DTW is built for, similar shape with mild timing variation.</p>
+<p><span style="font-size:24px;"><b>Unhelpful alignment</b></span></p>
+<p>DTW can also align the wrong thing. These two beats come from different classes, but DTW still finds a reasonably close match because part of the broad shape looks similar.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Assets/DTW 5.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Unhelpful alignment: different-class beats that still appear similar under DTW</figcaption>
+</figure>
+</div>
+<p>The warping path does not look extreme, which makes this a subtle failure. The alignment is numerically reasonable, but not clinically meaningful.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Assets/DTW 6.png" class="img-fluid figure-img" style="width:75.0%"></p>
+<figcaption>Unhelpful alignment warping path: a reasonable-looking path can still support a misleading match</figcaption>
+</figure>
+</div>
+<p>Main takeaway: DTW measures shape similarity under flexible timing, not scientific relevance. In settings like fetal monitoring, a method could align a repeating maternal heartbeat pattern well even if that is not the signal of interest.</p>
+<p><span style="font-size:24px;"><b>Bottom line</b></span></p>
+<p>DTW helps when timing differences are nuisance variation and shape is what matters. But a low DTW distance is not enough on its own. The match still has to make sense in the domain.</p>
 
 
 

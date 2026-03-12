@@ -11,7 +11,7 @@ format:
     code-tools: true
     highlight-style: github
     fig-align: center
-    embed-resources: true
+    embed-resources: false
 execute:
   warning: false
   message: false

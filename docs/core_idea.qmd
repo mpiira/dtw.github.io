@@ -1,4 +1,3 @@
-## Core Idea {.unnumbered}
 ---
 title: "Core Ideas"
 subtitle: "ECG200 Illustration · Time Series Analysis Final Project"
@@ -13,13 +12,13 @@ format:
     code-tools: true
     highlight-style: github
     fig-align: center
-    embed-resources: true
+    embed-resources: false
 execute:
   warning: false
   message: false
 ---
 
-### Motivation: Why Not Just Use Euclidean Distance?
+### Motivation: Why Not Just Use Euclidean Distance? {.unnumbered}
 
 When we compare two time series, the most natural instinct is to measure the
 **Euclidean distance** — subtract corresponding points, square, sum, and take

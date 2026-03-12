@@ -1,0 +1,195 @@
+---
+title: "Empirical Demonstration"
+format:
+  html:
+    toc: false
+    code-fold: false
+    code-tools: false
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Empirical Demonstration {.unnumbered}
+
+This section compares Euclidean distance with dynamic time warping on the ECG200 data. The goal is to show when DTW improves similarity matching and when it can still be misleading.
+
+### Setup {.unnumbered}
+
+```{r, echo=FALSE}
+library(dtw)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(tibble)
+```
+
+```{r, echo=FALSE}
+train_raw <- read.table("ECG200_TRAIN.txt", header = FALSE)
+test_raw  <- read.table("ECG200_TEST.txt", header = FALSE)
+
+z_norm_row <- function(x) {
+  s <- sd(x)
+  if (is.na(s) || s == 0) x - mean(x) else (x - mean(x)) / s
+}
+
+X_train <- t(apply(as.matrix(train_raw[, -1]), 1, z_norm_row))
+X_test  <- t(apply(as.matrix(test_raw[, -1]), 1, z_norm_row))
+X_all   <- rbind(X_train, X_test)
+y_all   <- c(train_raw[[1]], test_raw[[1]])
+
+label_name <- ifelse(y_all == 1, "Normal", "MI")
+```
+
+```{r, echo=FALSE}
+euclid_dist <- function(a, b) sqrt(sum((a - b)^2))
+
+dtw_fit <- function(a, b, window_size = 15) {
+  dtw(
+    a, b,
+    keep = TRUE,
+    step.pattern = symmetric2,
+    window.type = "sakoechiba",
+    window.size = window_size
+  )
+}
+
+plot_pair <- function(idx_a, idx_b, title_text, subtitle_text = NULL) {
+  df <- bind_rows(
+    tibble(time = 1:ncol(X_all), value = as.numeric(X_all[idx_a, ]),
+           series = paste0("Series ", idx_a, " (", label_name[idx_a], ")")),
+    tibble(time = 1:ncol(X_all), value = as.numeric(X_all[idx_b, ]),
+           series = paste0("Series ", idx_b, " (", label_name[idx_b], ")"))
+  )
+
+  ggplot(df, aes(time, value, color = series)) +
+    geom_line(linewidth = 0.8) +
+    labs(
+      title = title_text,
+      subtitle = subtitle_text,
+      x = "Time index",
+      y = "Standardized amplitude",
+      color = NULL
+    ) +
+    theme_minimal(base_size = 16) +
+    theme(
+      legend.position = "bottom",
+      plot.title = element_text(face = "bold"),
+      plot.subtitle = element_text(face = "bold")
+    )
+}
+
+plot_path <- function(alignment, title_text) {
+  tibble(i = alignment$index1, j = alignment$index2) |>
+    ggplot(aes(i, j)) +
+    geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "gray40") +
+    geom_path(linewidth = 1) +
+    coord_equal() +
+    labs(
+      title = title_text,
+      x = "Index in first series",
+      y = "Index in second series"
+    ) +
+    theme_minimal(base_size = 16) +
+    theme(plot.title = element_text(face = "bold"))
+}
+```
+
+### Comparing DTW with Euclidean distance {.unnumbered}
+
+These two figures use the same query beat. The only change is the similarity metric.
+
+```{r, echo=FALSE}
+query_id <- 112
+nn_dtw_id <- 21
+nn_euclid_id <- 66
+```
+
+```{r, echo=FALSE}
+plot_pair(
+  query_id,
+  nn_euclid_id,
+  "Query beat vs Euclidean nearest neighbor",
+  paste0("Query label: ", label_name[query_id], " | Neighbor label: ", label_name[nn_euclid_id])
+)
+```
+
+Euclidean distance compares observations index by index. Here it returns a nearest neighbor from the wrong class, so pointwise closeness is not enough to recover the more meaningful shape match.
+
+```{r, echo=FALSE}
+plot_pair(
+  query_id,
+  nn_dtw_id,
+  "Query beat vs DTW nearest neighbor",
+  paste0("Query label: ", label_name[query_id], " | Neighbor label: ", label_name[nn_dtw_id])
+)
+```
+
+DTW returns a nearest neighbor from the same class. Allowing small local timing shifts produces a match that better preserves overall waveform shape.
+
+### Useful alignment {.unnumbered}
+
+This is a case where DTW is helping. The two beats come from the same class, but their major features are slightly offset in time.
+
+```{r, echo=FALSE}
+useful_a <- 121
+useful_b <- 50
+
+useful_e <- euclid_dist(X_all[useful_a, ], X_all[useful_b, ])
+useful_dtw_fit <- dtw_fit(X_all[useful_a, ], X_all[useful_b, ])
+useful_d <- useful_dtw_fit$distance
+```
+
+```{r, echo=FALSE}
+plot_pair(
+  useful_a,
+  useful_b,
+  sprintf("Useful alignment: same-class beats\nEuclidean = %.2f | DTW = %.2f", useful_e, useful_d)
+)
+```
+
+The beats are both labeled MI, and the broad waveform pattern is similar even though the peaks and dips do not occur at exactly the same time index.
+
+```{r, echo=FALSE}
+plot_path(useful_dtw_fit, "Useful alignment warping path")
+```
+
+The path stays close to the diagonal with short horizontal and vertical moves. That indicates mild local time adjustment rather than extreme distortion, which is the setting where DTW is most useful.
+
+### Unhelpful alignment {.unnumbered}
+
+This example shows an important failure mode. DTW can still create a reasonable numerical match that is not meaningful for the task.
+
+```{r, echo=FALSE}
+unhelpful_a <- 140
+unhelpful_b <- 193
+
+unhelpful_e <- euclid_dist(X_all[unhelpful_a, ], X_all[unhelpful_b, ])
+unhelpful_dtw_fit <- dtw_fit(X_all[unhelpful_a, ], X_all[unhelpful_b, ])
+unhelpful_d <- unhelpful_dtw_fit$distance
+```
+
+```{r, echo=FALSE}
+plot_pair(
+  unhelpful_a,
+  unhelpful_b,
+  sprintf("Unhelpful alignment: different-class beats\nEuclidean = %.2f | DTW = %.2f", unhelpful_e, unhelpful_d)
+)
+```
+
+These beats come from different classes, but parts of the broad shape still line up. DTW can reward that similarity even when it is not the signal difference we care about.
+
+```{r, echo=FALSE}
+plot_path(unhelpful_dtw_fit, "Unhelpful alignment warping path")
+```
+
+The warping path does not look obviously pathological, which is exactly why this case matters. A smooth-looking alignment can still be scientifically misleading.
+
+### Why this matters {.unnumbered}
+
+DTW encodes similarity in shape under flexible timing, not similarity in meaning. That is powerful when timing variation is nuisance noise, but risky when the algorithm can align the wrong repeating structure. In a fetal monitoring example, DTW might align the maternal heartbeat well even though the fetal signal is the real object of interest.
+
+### Bottom line {.unnumbered}
+
+DTW broadens time series analysis beyond strict point-by-point comparison. It is useful when local timing shifts hide a real shape match, but it still needs domain judgment because a low DTW distance does not guarantee a relevant alignment.

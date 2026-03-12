@@ -51,7 +51,7 @@ M  E  O    O    O    W
 :::
 
 
-### Empirical demonstration and Performance metrics
+### Performance metrics
 ```{r}
 #| message: false
 #| echo: false

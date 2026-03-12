@@ -60,9 +60,9 @@ M  E  O    O    O    W
 library(readr)
 library(gt)
 
-summary_clean <- read_csv("ECG200/results/summary_clean.csv")
-summary_jitter <- read_csv("ECG200/results/summary_jitter.csv")
-summary_f1_drop <- read_csv("ECG200/results/summary_f1_drop.csv")
+summary_clean <- read_csv("Assets/summary_clean.csv")
+summary_jitter <- read_csv("Assets/summary_jitter.csv")
+summary_f1_drop <- read_csv("Assets/summary_f1_drop.csv")
 ```
 
 ```{r}

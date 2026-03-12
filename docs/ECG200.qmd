@@ -17,9 +17,7 @@ execute:
   message: false
 ---
 
-### The ECG200 Dataset {.unnumbered}
-
-#### What Is an ECG Signal?
+#### What Is an ECG Signal? {.unnumbered}
 
 An **electrocardiogram (ECG)** is a recording of the electrical activity of
 the heart over time. Electrodes placed on the skin detect tiny voltages as

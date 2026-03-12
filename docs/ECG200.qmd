@@ -1,6 +1,5 @@
 ---
-title: "Core Ideas"
-subtitle: "ECG200 Illustration · Time Series Analysis Final Project"
+title: "ECG200 Data"
 format:
   html:
     toc: true
